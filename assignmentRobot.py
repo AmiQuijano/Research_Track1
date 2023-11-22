@@ -231,9 +231,14 @@ list_actions = []
 """ dictionary: Sequence of velocities and times, for both linear and rotationak motion, taken 
 by the robot to go from the collection area to the first token"""
 
+token_tot = 6
+""" int: Total number of tokens in arena"""
+
 goal_code = -1 
+""" int: offset ID of token, initialized in -1"""
 
 action = 1
+""" int: Case type, initialized in Case 1"""
 
 R = Robot()
 """ instance of the class Robot"""
@@ -247,7 +252,7 @@ print('This is the collection area!')
    
 while 1:
     print('RUNNING ACTION ', action)
-    print(goal_code)
+    print('Goal is ', goal_code)
     print('Collected tokens are ', found_tokens)
    
     if action == 1:
@@ -258,7 +263,7 @@ while 1:
            
     elif action == 2:
         num = move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, -1) 
-        print('Searching for new a token to grab')
+        print('Searching for new token to grab')
         action = 3
         
         
@@ -268,7 +273,7 @@ while 1:
         action = 2
         found_tokens.append(num) # Add token to the list of collected tokens
     
-    if len(found_tokens) == 6: # If all 6 tokens have been collected, exit loop
+    if len(found_tokens) == token_tot: # If all 6 tokens have been collected, exit loop
         print('All tokens {} have been collected! GREAT JOB :D'.format(found_tokens)) 
         exit() 
     
