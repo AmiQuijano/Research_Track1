@@ -142,7 +142,7 @@ Returns:
 * `rot_y`: angle between the robot and the token (-1 if no golden token is detected)
 * `num`: offset number ir ID of the token (-1 if no golden token is detected)
 
-"""    
+```   
     FOR each token in R.see:
         If (token.dist < dist) and (token.type is MARKER_TOKEN_GOLD) and (token.ID not in found_tokens):
             Set dist to token.dist
