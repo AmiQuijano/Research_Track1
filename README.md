@@ -1,8 +1,7 @@
 # Python Robot Simulator
 Assignment for Research Track 1 Course.
 
-MSc Robotics Engineering at Universita degli studi di Genova
-
+MSc Robotics Engineering at University of Genova
 ## Simulator description
 This is a simple, portable simulator developed by [Student Robotics](https://studentrobotics.org/).
 The arena was modified to suit the particular objective of this exercise.
