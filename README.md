@@ -1,8 +1,10 @@
-# Research_Track1
-Assignments on Research Track 1 Course.
+# Python Robot Simulator
+Assignment for Research Track 1 Course
+MSc Robotics Engineering
+Universita degli Studi di Genova
 
-## Paragraph 1
-Hello.
+## Simulator description
+This is a simple, portable simulator developed by [Student Robotics](https://studentrobotics.org/)
 
 List:
 - items
