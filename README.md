@@ -274,83 +274,40 @@ Function move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal
 ```
 ### Main
 ```
-# Constants
-a_th = 2.0
-d_th_token = 0.4
-d_th_goal = 0.7
+Main function to move robot and tokens
 
-# Initializations
-found_tokens = []
-list_actions = []
-goal_code = -1
-action = 1
-R = Robot()
+Initialize needed variables and thresholds
 
-    # Main function to move robot and tokens
-    Function move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, grabbed_token):
-
-        list_actions = []  # Sequence of velocities and times for both linear and rotational motion
-        cond = True  # Condition to continue while loop
-
-        while cond:
-            If action == 1 or action == 2:
-                d_th = d_th_token
-                dist, rot_y, num = find_token(found_tokens)
-            ElseIf action == 3:
-                d_th = d_th_goal
-                dist, rot_y = find_goal(goal_code)
-                num = grabbed_token
-
-            If num in found_tokens and num != goal_code:
-                print('Token already collected. Searching...')
-                turn(2, 0.5)
-                list_actions.append({'action': 'turn', 'speed': 10, 'time': 0.5})
-            ElIf dist == -1:
-                print('No token in sight! Searching...')
-                turn(2, 0.5)
-                list_actions.append({'action': 'turn', 'speed': 10, 'time': 0.5})
-            ElIf dist >= d_th:
-                If -a_th <= rot_y <= a_th:
-                    print('Token detected! Approaching')
-                    drive(30, 0.5)
-                    list_actions.append({'action': 'drive', 'speed': 30, 'time': 0.5})
-                ElIf rot_y > a_th:
-                    print('Token detected! Turning right a bit')
-                    turn(2, 0.5)
-                    list_actions.append({'action': 'turn', 'speed': 2, 'time': 0.5})
-                ElIf rot_y < -a_th:
-                    print('Token detected! Turning left a bit')
-                    turn(-2, 0.5)
-                    list_actions.append({'action': 'turn', 'speed': -2, 'time': 0.5})
-            ElIf dist < d_th:
-                If action == 1:
-                    R.grab()
-                    print('Token {} grabbed'.format(num))
-                    print('Taking token to the collection area')
-                    For i in range(len(list_actions)):
-                        move = list_actions[len(list_actions) - i - 1]
-                        If move['action'] == 'drive':
-                            drive(-move['speed'], move['time'])
-                        Else:
-                            turn(-move['speed'], move['time'])
-                    turn(-10, 1)
-                    R.release()
-                    drive(-10, 3)
-                    print('Token {} is the GOAL reference!'.format(num))
-                    cond = False
-                    Return num
-                ElIf action == 2:
-                    R.grab()
-                    print('Token {} grabbed'.format(num))
-                    cond = False
-                    Return num
-                ElIf action == 3:
-                    R.release()
-                    print('Token {} dropped at GOAL'.format(num))
-                    drive(-15, 3)
-                    turn(10, 3)
-                    cond = False
-                    Return num
+print 'Moving to center of arena...'
+turn_right
+drive_forward
+print 'This is the collection area!'
+   
+WHILE True:
+    print 'RUNNING CASE #'
+    print 'Goal is token ID_of_goal_token'
+    print 'Collected tokens are found_tokens'
+   
+    IF Case 1:
+        num = call move_token
+        add token_ID to found_tokens
+        Case = Case 2
+        goal_code = num
+           
+    ELIF Case 2:
+        num = call move_token
+        print 'Searching for new token to grab'
+        Case = Case 3
+        
+    ELIF Case 3:
+        print 'Moving to GOAL token'
+        num = call move_token
+        Case = Case 2
+        add token_ID to found_tokens
+    
+    IF all_tokens_collected
+        print 'All tokens have been collected! GREAT JOB :D'
+        exit
 ```
 
 ## Main encountered difficulties
