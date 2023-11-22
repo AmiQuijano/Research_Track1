@@ -92,6 +92,12 @@ $ python3 run.py assignmentRobot.py
 # Assignment
 The project aims to make a holonomic robot move around the arena to find and grab all the golden tokens and collect them in a desired zone. For this assignment, the chosen dropp off zone was the central gray square of the arena
 
+## Learning outcomes
+
+## Main encountered difficulties
+
+## Possible improvements
+
 ## Code Description: Pseudocode
 The code in the file `assignment.py` contains the following functions explained as pseudocode:
 
@@ -254,7 +260,7 @@ Function move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal
                 Return num
 
 ```
-### main
+### Main
 ```
 # Constants
 a_th = 2.0
@@ -333,6 +339,8 @@ R = Robot()
                     turn(10, 3)
                     cond = False
                     Return num
+```
+
 
 
 
