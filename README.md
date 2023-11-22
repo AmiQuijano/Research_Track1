@@ -140,7 +140,7 @@ Arguments:
 Returns:
 * `dist`: distance of the closest token (-1 if no golden token is detected)
 * `rot_y`: angle between the robot and the token (-1 if no golden token is detected)
-* `num`: offset number ir ID of the token (-1 if no golden token is detected)
+* `num`: offset number or ID of the token (-1 if no golden token is detected)
 
 ```   
     FOR each token in R.see:
@@ -162,12 +162,12 @@ Arguments:
 * `goal_code`: offset number of the token referenced as the goal
 
 Returns:
-* `dist`: distance to the token goal (-1 if no golden token is detected)
-* `rot_y`: angle between the robot and the token goal (-1 if no golden token is detected)
+* `dist`: distance to the goal token (-1 if no golden token is detected)
+* `rot_y`: angle between the robot and the goal token (-1 if no golden token is detected)
 
 ```
 Function find_goal(goal_code):
-    FOR each goal in R.see():
+    FOR each goal in R.see:
         IF (goal.dist < dist) and (goal.ID is goal_code):
             Set dist to goal.dist
             Set rot_y to goal.rot_y
@@ -180,70 +180,95 @@ Function find_goal(goal_code):
 ```
 
 ### move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, grabbed_token)
-This function moves the robot according to 
+This function moves the robot according to 3 cases:
+* Case 1: Search for the first token, approach it, grab it, move it to center of arena and place it there. Make it the goal point for all future tokens found.
+* Case 2: Search for a new token, approach it and grab it, only if it has not been already collected.
+* Case 3: Move the grabbed token to the goal point once the goal has been found and place it there.
+
+Arguments:
+* `found_tokens`: List of token codes which have been collected
+* `goal_code`: offset number of the token referenced as the goal
+* `action`: Case number
+* `a_th`: angle threshold
+* `d_th_token`: distance threshold for approaching a token
+* `d_th_goal`: distance threshold for approaching the goal token
+* `grabbed_token`: Token that has been grabbed in Case 2`
+
+Returns:
+* `num`: The goal (for Case 1), the grabbed token (for Case 2) and the released token (for Case 3)
+
 ```
 Function move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, grabbed_token):
-    list_actions = []  # Sequence of velocities and times for both linear and rotational motion
-    cond = True  # Condition to continue while loop
 
-    while cond:
-        If action == 1 or action == 2:
-            d_th = d_th_token
-            dist, rot_y, num = find_token(found_tokens)
-        ElseIf action == 3:
-            d_th = d_th_goal
-            dist, rot_y = find_goal(goal_code)
+    WHILE condition is True:
+        IF Case 1 or Case 2:
+            distance_threshold = distance_threshold_for_approaching_token
+            dist, rot_y, num = find_token
+
+        ELSEIF Case 3:
+            distance_threshold = distance_threshold_for_approaching_goal
+            dist, rot_y = find_goal
             num = grabbed_token
 
-        If num in found_tokens and num != goal_code:
-            print('Token already collected. Searching...')
-            turn(2, 0.5)
-            list_actions.append({'action': 'turn', 'speed': 10, 'time': 0.5})
-        ElIf dist == -1:
-            print('No token in sight! Searching...')
-            turn(2, 0.5)
-            list_actions.append({'action': 'turn', 'speed': 10, 'time': 0.5})
-        ElIf dist >= d_th:
-            If -a_th <= rot_y <= a_th:
-                print('Token detected! Approaching')
-                drive(30, 0.5)
-                list_actions.append({'action': 'drive', 'speed': 30, 'time': 0.5})
-            ElIf rot_y > a_th:
-                print('Token detected! Turning right a bit')
-                turn(2, 0.5)
-                list_actions.append({'action': 'turn', 'speed': 2, 'time': 0.5})
-            ElIf rot_y < -a_th:
-                print('Token detected! Turning left a bit')
-                turn(-2, 0.5)
-                list_actions.append({'action': 'turn', 'speed': -2, 'time': 0.5})
-        ElIf dist < d_th:
-            If action == 1:
-                R.grab()
-                print('Token {} grabbed'.format(num))
-                print('Taking token to the collection area')
-                For i in range(len(list_actions)):
-                    move = list_actions[len(list_actions) - i - 1]
-                    If move['action'] == 'drive':
-                        drive(-move['speed'], move['time'])
-                    Else:
-                        turn(-move['speed'], move['time'])
-                turn(-10, 1)
-                R.release()
-                drive(-10, 3)
-                print('Token {} is the GOAL reference!'.format(num))
-                cond = False
+        IF num is in found_tokens and num is not goal_code:
+            print 'Token already collected. Searching...'
+            turn_right
+            record_motion
+
+        ELIF dist is -1:
+            print 'No token in sight! Searching...'
+            turn_right
+            record_motion
+
+        ELIF dist is >= to distance_threshold:
+            IF -angle_threshold <= rot_y <= angle_threshold:
+                print 'Token detected! Approaching'
+                drive_forward
+                record_motion
+                
+            ELIF rot_y > angle_threshold:
+                print 'Token detected! Turning right a bit'
+                turn_right
+                record_motion
+                
+            ElIf rot_y < -angle_threshold::
+                print 'Token detected! Turning left a bit'
+                turn_left
+                record_motion
+
+        ELIF dist < distance_threshold:
+            IF Case 1:
+                grab_token
+                print 'Token ID grabbed'
+                print 'Taking token to the collection area'
+                For i in range of recorded_motions_list length:
+                   take_last_recorded_motion_of_list
+
+                    IF last_recorded_motion is drive:
+                        drive_at_opposite_recorded_speed
+  
+                    ELSE:
+                        turn_at_opposite_recorded_speed
+
+                turn_left
+                release_token
+                drive_backwards
+                print 'Token ID is the GOAL reference!'
+                Set condition to False
                 Return num
-            ElIf action == 2:
-                R.grab()
-                print('Token {} grabbed'.format(num))
-                cond = False
+
+            ELIF Case 2:
+                grab_token
+                print 'Token ID grabbed'
+                Set condition to False
                 Return num
-            ElIf action == 3:
-                R.release()
-                print('Token {} dropped at GOAL'.format(num))
-                drive(-15, 3)
-                turn(10, 3)
-                cond = False
+
+            ELIF Case 3:
+                release_token
+                print 'Token ID dropped at GOAL'
+                drive_backwards
+                turn_right
+                Set condition to False
                 Return num
 
 ```
