@@ -26,3 +26,9 @@ Once all the dependencies are installed, simply run the following line to test t
 ```
 $ python3 run.py assignment.py
 ```
+## Code Description: Pseudocode
+The code in the file `assignment.py` contains the following functions explained as pseudocode:
+**drive(speed, seconds)**
+```
+jkhjbw
+```
