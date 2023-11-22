@@ -180,6 +180,7 @@ Function find_goal(goal_code):
 ```
 
 ### move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, grabbed_token)
+This function moves the robot according to 
 ```
 Function move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, grabbed_token):
     list_actions = []  # Sequence of velocities and times for both linear and rotational motion
