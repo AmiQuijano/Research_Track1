@@ -7,10 +7,7 @@ The arena was modified to suit the particular objective of this exercise.
 
 The simulator, in this particular arena, provides one **Holonomic robot** and 6 equidistant **golden tokens** which are placed around a central gray square, as it can be observed in the image below.
 
-### Assignment description
-The project aims to make a holonomic robot move around the arena to find and grab all the golden tokens and collect them in a desired zone.
-
-## Installing and running 
+### Installing and running 
 The simulator was built and run with Ubuntu 22 and Python 3. Install them if it is not the case.
 The simulator requires the [pygame](https://www.pygame.org/news) library, [PyPyBox2D](https://pypi.org/project/pypybox2d/2.1-r331/), and [PyYAML](https://pypi.org/project/PyYAML/). For installing them, run the following lines in the terminal.
 ```
@@ -26,10 +23,13 @@ Once all the dependencies are installed, simply run the following line to test t
 ```
 $ python3 run.py assignment.py
 ```
+### Assignment description
+The project aims to make a holonomic robot move around the arena to find and grab all the golden tokens and collect them in a desired zone.
+
 ## Code Description: Pseudocode
 The code in the file `assignment.py` contains the following functions explained as pseudocode:
 
-* **drive(speed, seconds)**
+### drive(speed, seconds)
 ```
 jkhjbw
 ```
