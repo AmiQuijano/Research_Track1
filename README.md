@@ -23,7 +23,7 @@ Once all the dependencies are installed, simply run the following line to test t
 ```
 $ python3 run.py assignment.py
 ```
-### Assignment description
+# Assignment
 The project aims to make a holonomic robot move around the arena to find and grab all the golden tokens and collect them in a desired zone.
 
 ## Code Description: Pseudocode
