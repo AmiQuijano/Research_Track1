@@ -71,7 +71,7 @@ for m in markers:
 
 [sr-api]: https://studentrobotics.org/docs/programming/sr/
 
-## Installing and running 
+# Installing and running 
 The simulator was built and run with Ubuntu 22 and Python 3. Install them if it is not the case.
 The simulator requires the [pygame](https://www.pygame.org/news) library, [PyPyBox2D](https://pypi.org/project/pypybox2d/2.1-r331/), and [PyYAML](https://pypi.org/project/PyYAML/). For installing them, run the following lines in the terminal.
 ```
