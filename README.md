@@ -99,7 +99,7 @@ The result of the developed script is the following :D
 ![Alt Text](images/img1.png)
 
 ## Code Description: Pseudocode
-The code in the file `assignment.py` contains the following functions explained as pseudocode:
+The code in the file `assignmentRobot.py` contains the following functions and main explained with pseudocode as follows:
 
 ### drive(speed, seconds)
 This function makes the robot move in a straight line forward or backwards (depending on `speed` sign) for a certain time given a desired speed. 
