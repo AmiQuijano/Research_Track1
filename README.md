@@ -132,63 +132,50 @@ Function turn(speed, seconds):
     Set power of Robot.motor.left to 0
 ```
 ### find_token(found_tokens)
-This function checks the tokens seen by the robot with `R.see` sets an angular velocity on the robot. It takes as input a `speed`, which is the velocity of the motors and `seconds`, which is the time of the motors actuation.
-To turn the robot, both motors, right and left, must have the same velocity magnitude but opposing directions.
-```
-Function find_token(found_tokens):
-    """
-    Function to find the closest golden token
+This function finds the closest golden token identified by the robot with `R.see` within an initial maximum distance `dist` which have not yet been collected before. Keep in mind that `R.see` gives the distance `dist` and angle `rot_y` between the robot and the token seen. 
 
-    Inputs:
-        found_tokens (vector): List of token codes which have been collected
-        
-    Returns:
-        dist (float): distance of the closest token (-1 if no golden token is detected)
-        rot_y (float): angle between the robot and the token (-1 if no golden token is detected)
-        num (int): offset number of the token (-1 if no golden token is detected)
-    """
-    dist = 100
-    rot_y = -1
-    num = -1
-    
-    For each token in R.see():
-        If (token_distance < dist) and (token_type is MARKER_TOKEN_GOLD) and (token_offset not in found_tokens):
+Arguments:
+* `found_tokens`: List of token codes which have been collected
+
+Returns:
+* `dist`: distance of the closest token (-1 if no golden token is detected)
+* `rot_y`: angle between the robot and the token (-1 if no golden token is detected)
+* `num`: offset number ir ID of the token (-1 if no golden token is detected)
+
+"""    
+    FOR each token in R.see:
+        If (token.dist < dist) and (token.type is MARKER_TOKEN_GOLD) and (token.ID not in found_tokens):
             Set dist to token.dist
             Set rot_y to token.rot_y
-            Set num to token.info.offset
-    End For
+            Set num to token.ID
+    END FOR
     
-    If dist is still 100:
+    IF dist is still 100:
         Return -1, -1, -1
-    Else:
+    ELSE:
         Return dist, rot_y, num
 ```
 ### find_goal(goal_code)
+This function finds the token assigned as the goal position (in this case, the center of the gray square in layout) identified by the robot with `R.see` within a maximum distance defined as `dist`. Keep in mind that `R.see` gives the distance `dist` and angle `rot_y` between the robot and the token seen. 
+
+Arguments:
+* `goal_code`: offset number of the token referenced as the goal
+
+Returns:
+* `dist`: distance to the token goal (-1 if no golden token is detected)
+* `rot_y`: angle between the robot and the token goal (-1 if no golden token is detected)
+
 ```
 Function find_goal(goal_code):
-    """
-    Function to find the GOAL
-    
-    Input: 
-        goal_code: offset number of the token referenced as the GOAL
-    
-    Returns:
-        dist (float): distance from robot to the GOAL (-1 if GOAL is not detected)
-        rot_y (float): angle between the robot and GOAL (-1 if GOAL is not detected)
-    """
-    Create a Robot object R
-    
-    dist = 100
-    rot_y = -1
-    
-    For each goal in R.see():
-        If (goal.dist < dist) and (goal.info.offset == goal_code):
+    FOR each goal in R.see():
+        IF (goal.dist < dist) and (goal.ID is goal_code):
             Set dist to goal.dist
             Set rot_y to goal.rot_y
-            
-    If dist is still 100:
+    END FOR
+    
+    IF dist is still 100:
         Return -1, -1
-    Else:
+    ELSE:
         Return dist, rot_y
 ```
 
