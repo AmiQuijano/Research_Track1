@@ -7,6 +7,8 @@ The arena was modified to suit the particular objective of this exercise.
 
 The simulator, in this particular arena, provides one **Holonomic robot** and 6 equidistant **golden tokens** which are placed around a central gray square, as it can be observed in the image below.
 
+![Alt Text](images/img1.png)
+
 ## Simulator Features
 The API for controlling a simulated robot is designed to be as similar as possible to the [SR API][sr-api].
 
