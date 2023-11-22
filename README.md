@@ -12,16 +12,17 @@ The project aims to make a holonomic robot move around the arena to find and gra
 
 ## Installing and running 
 The simulator was built and run with Ubuntu 22 and Python 3. Install them if it is not the case.
-The simulator requires the [pygame](https://www.pygame.org/news) library, [PyPyBox2D](https://pypi.org/project/pypybox2d/2.1-r331/), and [PyYAML](https://pypi.org/project/PyYAML/).If this is not done, run the following lines in the terminal.
-
+The simulator requires the [pygame](https://www.pygame.org/news) library, [PyPyBox2D](https://pypi.org/project/pypybox2d/2.1-r331/), and [PyYAML](https://pypi.org/project/PyYAML/). For installing them, run the following lines in the terminal.
 ```
 $ sudo apt-get install python3-dev python3-pip python3-pygame python3-yaml
 $ sudo pip3 install pypybox2d
-$ cd /usr/local/lib/python3.8/dist-packages/pypybox2d```
+$ cd /usr/local/lib/python3.8/dist-packages/pypybox2d
+```
 (check pypybox2d install directory since it might be different)
 
-To download and run this simulator, git is required. Clone this repository. 
-In the directory of the repository, run
-```$ python3 run.py assignment.py```
+To download and run this simulator, install git and clone this repository. 
 
-Once the dependencies are installed, simply run the `test.py` script to test out the simulator.
+Once all the dependencies are installed, simply run the following line to test the simulator.
+```
+$ python3 run.py assignment.py
+```
