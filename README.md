@@ -1,6 +1,8 @@
 # Python Robot Simulator
 Assignment for Research Track 1 Course.
+
 MSc Robotics Engineering.
+
 Universita degli Studi di Genova.
 
 ## Simulator description
