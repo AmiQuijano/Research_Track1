@@ -9,7 +9,7 @@ The simulator, in this particular arena, provides one **Holonomic robot** and 6 
 
 ![Alt Text](images/img2.png)
 
-## Simulator Features
+## Simulator Documentation
 The API for controlling a simulated robot is designed to be as similar as possible to the [SR API][sr-api].
 
 ### Motors
@@ -98,26 +98,17 @@ The result of the developed script is the following :D
 
 ![Alt Text](images/img1.png)
 
-## Learning outcomes
-
-## Main encountered difficulties
-
-## Possible improvements
-
 ## Code Description: Pseudocode
 The code in the file `assignment.py` contains the following functions explained as pseudocode:
 
 ### drive(speed, seconds)
+This function makes the robot move ina straight line for a certain time given a desired speedt. 
+Arguments:
+* `speed`: The velocity of the motors in this case equal on both motors in order to move straight.
+* `seconds`:Time interval during which the robot will move straight.
 
 ```
 Function drive(speed, seconds):
-    """
-    Function for setting a linear velocity
-
-    Args: 
-        speed (float): the speed of the wheels
-        seconds (float): the time interval of the motion
-    """
     Set power of R.motors[0].m0 to speed
     Set power of R.motors[0].m1 to speed
     Sleep for seconds
@@ -125,6 +116,8 @@ Function drive(speed, seconds):
     Set power of R.motors[0].m1 to 0
 ```
 ### turn(speed, seconds)
+This function sets an angular velocity on the robot. It takes as input a `speed`, which is the velocity of the motors and `seconds`, which is the time of the motors actuation.
+To turn the robot, both motors, right and left, must have the same velocity magnitude but opposing directions.
 ```
 Function turn(speed, seconds):
     """
@@ -141,6 +134,8 @@ Function turn(speed, seconds):
     Set power of R.motors[0].m1 to 0
 ```
 ### find_token(found_tokens)
+This function checks the tokens seen by the robot with `R.see` sets an angular velocity on the robot. It takes as input a `speed`, which is the velocity of the motors and `seconds`, which is the time of the motors actuation.
+To turn the robot, both motors, right and left, must have the same velocity magnitude but opposing directions.
 ```
 Function find_token(found_tokens):
     """
@@ -347,7 +342,9 @@ R = Robot()
                     Return num
 ```
 
+## Main encountered difficulties
 
 
 
-```
+## Possible improvements
+The code works very smoothly in the current arena layout. Theredfore, it would be worthit to test the code in other arena layouts where the golden tokens are placed differently or where there are also other types of tokens such as silver ones.
