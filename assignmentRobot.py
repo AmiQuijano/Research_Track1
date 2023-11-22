@@ -66,7 +66,7 @@ def find_token(found_tokens):
     Function to find the closest golden token
 
     Inputs:
-        found_tokens (vector): List of token codes which have been collected
+        found_tokens (list): List of token codes which have been collected
         
     Returns:
         dist (float): distance of the closest token (-1 if no golden token is detected)
@@ -225,7 +225,7 @@ d_th_goal = 0.7
 """ float: Threshold for the control of the linear distance when searching the GOAL"""
 
 found_tokens = []
-""" vector: Empty vector to be filled with the offset numbers of the found tokens"""
+""" list: Empty list to be filled with the offset numbers of the found tokens"""
 
 list_actions = []
 """ dictionary: Sequence of velocities and times, for both linear and rotationak motion, taken 
