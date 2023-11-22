@@ -7,7 +7,7 @@ The arena was modified to suit the particular objective of this exercise.
 
 The simulator, in this particular arena, provides one **Holonomic robot** and 6 equidistant **golden tokens** which are placed around a central gray square, as it can be observed in the image below.
 
-![Alt Text](images/img1.png)
+![Alt Text](images/img2.png)
 
 ## Simulator Features
 The API for controlling a simulated robot is designed to be as similar as possible to the [SR API][sr-api].
@@ -92,7 +92,10 @@ $ python3 run.py assignmentRobot.py
 ```
 
 # Assignment
-The project aims to make a holonomic robot move around the arena to find and grab all the golden tokens and collect them in a desired zone. For this assignment, the chosen dropp off zone was the central gray square of the arena
+The project aims to make a holonomic robot move around the arena to find and grab all the golden tokens and collect them in a desired zone. For this assignment, the chosen dropp off zone was the central gray square of the arena. 
+
+The result of the developed script is the following :D
+![Alt Text](images/img1.png)
 
 ## Learning outcomes
 
