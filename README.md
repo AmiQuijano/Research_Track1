@@ -95,6 +95,7 @@ $ python3 run.py assignmentRobot.py
 The project aims to make a holonomic robot move around the arena to find and grab all the golden tokens and collect them in a desired zone. For this assignment, the chosen dropp off zone was the central gray square of the arena. 
 
 The result of the developed script is the following :D
+
 ![Alt Text](images/img1.png)
 
 ## Learning outcomes
