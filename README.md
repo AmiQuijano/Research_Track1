@@ -6,8 +6,4 @@ This is a simple, portable simulator developed by [Student Robotics](https://stu
 The arena was modified to suit the particular objective of this exercise.
 
 The simulator, in this particular arena, provides one **Holonomic robot** and 6 equidistant **golden tokens** which are placed around a central gray square, as it can be observed in the image below.
-
-List:
-- items
-- items
-- ...
+![Alt Text]()
