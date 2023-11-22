@@ -1,12 +1,13 @@
 # Python Robot Simulator
-Assignment for Research Track 1 Course.
+### Assignment 1 for Research Track 1 Course.
+-------------------
 
 MSc Robotics Engineering at University of Genova
 ## Simulator description
 This is a simple, portable simulator developed by [Student Robotics](https://studentrobotics.org/).
 The arena was modified to suit the particular objective of this exercise.
 
-The simulator, in this particular arena, provides one **Holonomic robot** and 6 equidistant **golden tokens** which are placed around a central gray square, as it can be observed in the image below.
+The simulator, in this particular project, provides one **Holonomic robot** and 6 equidistant **golden tokens** which are placed around a central gray square, as it can be observed in the image below.
 
 ![Alt Text](images/img2.png)
 
