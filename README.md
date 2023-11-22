@@ -102,36 +102,34 @@ The result of the developed script is the following :D
 The code in the file `assignment.py` contains the following functions explained as pseudocode:
 
 ### drive(speed, seconds)
-This function makes the robot move ina straight line for a certain time given a desired speedt. 
+This function makes the robot move in a straight line forward or backwards (depending on `speed` sign) for a certain time given a desired speed. 
+
 Arguments:
 * `speed`: The velocity of the motors in this case equal on both motors in order to move straight.
 * `seconds`:Time interval during which the robot will move straight.
 
 ```
 Function drive(speed, seconds):
-    Set power of R.motors[0].m0 to speed
-    Set power of R.motors[0].m1 to speed
+    Set power of Robot.motor.right to speed
+    Set power of Robot.motor.left to speed
     Sleep for seconds
-    Set power of R.motors[0].m0 to 0
-    Set power of R.motors[0].m1 to 0
+    Set power of Robot.motor.right to 0
+    Set power of Robot.motor.left to 0
 ```
 ### turn(speed, seconds)
-This function sets an angular velocity on the robot. It takes as input a `speed`, which is the velocity of the motors and `seconds`, which is the time of the motors actuation.
-To turn the robot, both motors, right and left, must have the same velocity magnitude but opposing directions.
+This function makes the robot turn either right or left (depending on `speed` sign) a certain time given a desired speed. 
+
+Arguments:
+* `speed`: The velocity of the motors in this case equal in magnitude on both motors but opposite in sign in order to make a turn.
+* `seconds`:Time interval during which the robot will move straight.
+  
 ```
 Function turn(speed, seconds):
-    """
-    Function for setting an angular velocity
-    
-    Args: 
-        speed (float): the speed of the wheels
-        seconds (float): the time interval of the motion
-    """
-    Set power of R.motors[0].m0 to speed
-    Set power of R.motors[0].m1 to -speed
+    Set power of Robot.motor.right to speed
+    Set power of Robot.motor.left to -speed
     Sleep for seconds
-    Set power of R.motors[0].m0 to 0
-    Set power of R.motors[0].m1 to 0
+    Set power of Robot.motor.right to 0
+    Set power of Robot.motor.left to 0
 ```
 ### find_token(found_tokens)
 This function checks the tokens seen by the robot with `R.see` sets an angular velocity on the robot. It takes as input a `speed`, which is the velocity of the motors and `seconds`, which is the time of the motors actuation.
