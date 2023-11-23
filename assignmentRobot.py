@@ -79,9 +79,6 @@ def find_token(found_tokens):
             dist = token.dist
             rot_y = token.rot_y
             num = token.info.offset
-     #   elif token.info.offset in found_tokens:
-     #       num = token.info.offset
-     #       print('Token {} already collected. Searching...'.format(num))
     if dist == 100:
         return -1, -1, -1
     else:
@@ -113,7 +110,11 @@ def find_goal(goal_code):
 def move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, grabbed_token):
 
     """
-    Function to move robot and tokens
+    Function to move robot and tokens considering three cases
+    Action 1: Search first token, place it in the collection zone and indicate this
+    token as the GOAL token
+    Action 2: Search a token different from GOAL token and grab it
+    Action 3: Take a grabbed token to the GOAL and release it
     
     Input: 
         found_tokens (vector): List of token codes which have been collected
@@ -137,7 +138,6 @@ def move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, gra
     while cond:
          
         if action == 1 or action == 2: # Looking for the first token or another one 
-     #   elif action == 2: # Looking for token to be grabbed
             d_th = d_th_token
             dist, rot_y, num = find_token(found_tokens)
         
@@ -145,8 +145,7 @@ def move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, gra
             d_th = d_th_goal
             dist, rot_y = find_goal(goal_code)
             num = grabbed_token
-            
-    
+                
         if num in found_tokens and num != goal_code: # If token detected has already been collected, turn right
             print('Token already collected. Searching...')
             turn(2, 0.5)
@@ -173,8 +172,8 @@ def move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, gra
                 turn(-2, 0.5)
                 list_actions.append({'action': 'turn', 'speed': -2, 'time': 0.5})
     
-        elif dist < d_th:
-            if action == 1:
+        elif dist < d_th: # If token is close enough 
+            if action == 1: # If first token is to be collected
                 R.grab()
                 print('Token {} grabbed'.format(num))    
                 print('Taking token to collection area')
@@ -196,15 +195,14 @@ def move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, gra
                 cond = False
                 return num
      
-            if action == 2: # If token needs to be grabbed and is close enough, 
+            if action == 2: # If any other token needs to be grabbed
                 R.grab() # Grab token
                 print('Token {} grabbed'.format(num)) 
                 cond = False 
                 return num
         
-            elif action == 3: # If token needs to be released and GOAL is close enough 
+            elif action == 3: # If grabbed token needs to be released at GOAL
                 R.release() # Release token
-                #found_tokens.append(num) # Add token to the list of collected tokens
                 print('Token {} dropped at GOAL'.format(num))
                 # Move away to allow some space
                 drive(-15, 3)
@@ -251,8 +249,8 @@ drive(43, 6.5)
 print('This is the collection area!')
    
 while 1:
-    print('RUNNING ACTION ', action)
-    print('Goal is ', goal_code)
+    print('CASE ', action)
+    print('Goal is token ', goal_code)
     print('Collected tokens are ', found_tokens)
    
     if action == 1:
