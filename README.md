@@ -125,9 +125,10 @@ Function drive(speed, seconds):
 This function makes the robot turn either right or left (depending on `speed` sign) a certain time given a desired speed. 
 
 Arguments:
-* `speed`: The velocity of the motors in this case equal in magnitude on both motors but opposite in sign in order to make a turn.
+* `speed`: The velocity of the motors, in this case equal in magnitude on both motors but opposite in sign in order to make a turn.
 * `seconds`:Time interval during which the robot will move straight.
-  
+
+Pseudocode:
 ```
 Function turn(speed, seconds):
     Set power of Robot.motor.right to speed
@@ -137,7 +138,7 @@ Function turn(speed, seconds):
     Set power of Robot.motor.left to 0
 ```
 ### find_token(found_tokens)
-This function finds the closest golden token identified by the robot with `R.see` within an initial maximum distance `dist` which have not yet been collected before. Keep in mind that `R.see` gives the distance `dist` and angle `rot_y` between the robot and the token seen. 
+This function finds the closest golden token identified by the robot with `R.see` within an initial maximum distance `dist = 100` which has not yet been collected before. Keep in mind that `R.see` gives the distance `dist` and angle `rot_y` between the robot and the token seen. 
 
 Arguments:
 * `found_tokens`: List of token codes which have been collected
@@ -161,15 +162,16 @@ Returns:
         Return dist, rot_y, num
 ```
 ### find_goal(goal_code)
-This function finds the token assigned as the goal position (in this case, the center of the gray square in layout) identified by the robot with `R.see` within a maximum distance defined as `dist`. Keep in mind that `R.see` gives the distance `dist` and angle `rot_y` between the robot and the token seen. 
+This function finds the token assigned as the goal position (in this case, the center of the gray square in layout) identified by the robot with `R.see` within a maximum distance defined as `dist = 100`. Keep in mind that `R.see` gives the distance `dist` and angle `rot_y` between the robot and the token seen. 
 
 Arguments:
-* `goal_code`: offset number of the token referenced as the goal
+* `goal_code`: offset number or ID of the token referenced as the goal
 
 Returns:
 * `dist`: distance to the goal token (-1 if no golden token is detected)
 * `rot_y`: angle between the robot and the goal token (-1 if no golden token is detected)
 
+Pseudocode:
 ```
 Function find_goal(goal_code):
     FOR each goal in R.see:
@@ -202,6 +204,7 @@ Arguments:
 Returns:
 * `num`: The goal (for Case 1), the grabbed token (for Case 2) and the released token (for Case 3)
 
+Pseudocode:
 ```
 Function move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, grabbed_token):
 
