@@ -340,9 +340,17 @@ the initialization of the program
 position and orientation, are known
 * It is known that there are 6 tokens in total
 * It is known that the tokens are placed around the central gray square
+This assumptions where taken into consideration given that the simulator has certain limitations (there is no global reference frame to refer to or only distances and angles between tokens can be obtained) that require a certain level of hardcoding
 
-The code works very smoothly in the current arena layout given these assumptions. Theredfore, it would be interesting to test the code and in other arena layouts where:
-    - Golden tokens are placed differently 
-    - Tere are also other types of tokens such as silver ones
+The code works very smoothly in the current arena layout given these assumptions. Therefore, it would be interesting to test the code and in other arena layouts where:
+- Golden tokens are placed differently 
+- There are also other types of tokens such as silver ones
+- There are more than 6 tokens
+- Initial position of the robot is different
+  etc.
+
+Given these other situations it would worth it to see if an even more robust code can be written.
+      
+     
     
     
