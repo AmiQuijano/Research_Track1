@@ -127,7 +127,7 @@ This function makes the robot turn either right or left (depending on `speed` si
 
 Arguments:
 * `speed`: The velocity of the motors, in this case equal in magnitude on both motors but opposite in sign in order to make a turn.
-* `seconds`:Time interval during which the robot will move straight.
+* `seconds`: Time interval during which the robot will move straight.
 
 Pseudocode:
 ```
@@ -352,8 +352,8 @@ WHILE True:
 ![Alt Text](images/vid33.gif)
 
 ### Collection of last token
-Case 2: Approaching and grabbing token different from goal token
-Case 3: Taking grabbed token towards goal token
+* Case 2: Approaching and grabbing token different from goal token
+* Case 3: Taking grabbed token towards goal token
 
 ![Alt Text](images/vidt.gif)
 
