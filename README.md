@@ -1,6 +1,7 @@
 # Python Robot Simulator
 
 Assignment 1 for Research Track 1 Course
+
 MSc Robotics Engineering at University of Genova
 
 -------------------
@@ -97,6 +98,13 @@ $ python3 run.py assignmentRobot.py
 
 # Assignment
 The project aims to make a holonomic robot move around the arena to find and grab all the golden tokens and collect them in a desired zone. For this assignment, the chosen dropp off zone was the central gray square of the arena. 
+The solution developed runs around the following steps:
+1. Move the robot to the collection area (center of the gray aquare).
+2. Search for the first golden token (whichever `R.see` detects first), move towards it while recording these motions and grab it.
+3. Move back to the collection area by tracing backwards the recorded motions, release the token and reference this first	token as the "GOAL" point.
+4. From the goal position, look for another golden token not collected before (whichever `R.see` detects first), move	towards it, and grab it.
+5. From the grabbed position, look for the token set as the "GOAL", move towards it and release the token.
+6. Repeat 4. and 5. iteratively until all golden tokens are collected, at which point the robot will stop searching for more tokens.
 
 The result of the developed script is the following :D
 
@@ -205,7 +213,7 @@ Arguments:
 * `grabbed_token`: Token that has been grabbed in Case 2`
 
 Returns:
-* `num`: The goal (for Case 1), the grabbed token (for Case 2) and the released token (for Case 3)
+* `num`: The goal token (for Case 1), the grabbed token (for Case 2) and the released token (for Case 3)
 
 Pseudocode:
 ```
@@ -214,37 +222,37 @@ Function move_token(found_tokens, goal_code, case, angle_threshold, distance_thr
     WHILE condition is True:
         IF Case 1 or Case 2:
             distance_threshold = distance_threshold_for_approaching_token
-            dist, rot_y, num = find_token
+            dist, rot_y, num = find_token()
 
         ELSEIF Case 3:
             distance_threshold = distance_threshold_for_approaching_goal
-            dist, rot_y = find_goal
+            dist, rot_y = find_goal()
             num = grabbed_token
 
         IF num is in found_tokens and num is not goal_code:
             print 'Token already collected. Searching...'
-            turn_right
+            turn()_right
             record_motion
 
         ELIF dist is -1:
             print 'No token in sight! Searching...'
-            turn_right
+            turn()_right
             record_motion
 
         ELIF dist is >= to distance_threshold:
             IF -angle_threshold <= rot_y <= angle_threshold:
                 print 'Token detected! Approaching'
-                drive_forward
+                drive()_forward
                 record_motion
                 
             ELIF rot_y > angle_threshold:
                 print 'Token detected! Turning right a bit'
-                turn_right
+                turn()_right
                 record_motion
                 
             ElIf rot_y < -angle_threshold::
                 print 'Token detected! Turning left a bit'
-                turn_left
+                turn()_left
                 record_motion
 
         ELIF dist < distance_threshold:
@@ -256,14 +264,14 @@ Function move_token(found_tokens, goal_code, case, angle_threshold, distance_thr
                    take_last_recorded_motion_of_list
 
                     IF last_recorded_motion is drive:
-                        drive_at_opposite_recorded_speed
+                        drive()_at_opposite_recorded_speed
   
                     ELSE:
-                        turn_at_opposite_recorded_speed
+                        turn()_at_opposite_recorded_speed
 
-                turn_left
+                turn()_left
                 release_token
-                drive_backwards
+                drive()_backwards
                 print 'Token ID is the GOAL reference!'
                 Set condition to False
                 Return num
@@ -277,14 +285,14 @@ Function move_token(found_tokens, goal_code, case, angle_threshold, distance_thr
             ELIF Case 3:
                 release_token
                 print 'Token ID dropped at GOAL'
-                drive_backwards
-                turn_right
+                drive()_backwards
+                turn()_right
                 Set condition to False
                 Return num
 
 ```
 ### Main
-The main function consists on one while loop where the first action executed corresponds to Case 1. After Case 1 is executed, performance of Case 2 and Case 3 is alternating until all tokens have been collected.
+The main function consists on one while loop where the first action executed corresponds to Case 1. After Case 1 is executed, Case 2 and Case 3 are alternating until all tokens have been collected.
 
 The initialized variables are:
 * `a_th = 2.0`: Threshold for the control of the orientation
@@ -304,8 +312,8 @@ Main function to move robot and tokens
 Initialize needed variables and thresholds
 
 print 'Moving to center of arena...'
-turn_right
-drive_forward
+turn()_right
+drive()_forward
 print 'This is the collection area!'
    
 WHILE True:
@@ -314,19 +322,19 @@ WHILE True:
     print 'Collected tokens are found_tokens'
    
     IF Case 1:
-        num = move_token_Case1
+        num = move_token()_Case1
         add token_ID to found_tokens
         Case = Case 2
         goal_code = num
            
     ELIF Case 2:
-        num = call move_token_Case2
+        num = move_token()_Case2
         print 'Searching for new token to grab'
         Case = Case 3
         
     ELIF Case 3:
         print 'Moving to GOAL token'
-        num = call move_token_Case3
+        num = move_token()_Case3
         Case = Case 2
         add token_ID to found_tokens
     
@@ -359,21 +367,36 @@ WHILE True:
 
 ## Main encountered difficulties
 The main challenges faced for complying the requirements where:
-* **Tuning the motions, velocity and time**
-During the testing of the code, it was found that even small changes in either the velocity and time of the drive and turn functions could make a significant difference on the final position of the tokens. Additionally, after certain tasks such as `R.grab` or `R.release`, some movements where necessary for a smooth and efficient search and place of the tokens. Tuning of motion, velocity and time where needed in order to:
-     - Locate the robot in the center of the arena as desired as the collection zone.
+* **Tuning the velocity and time**
+During the testing of the code, it was found that even small changes in velocity or time of both the drive and turn functions could make a significant difference on the final position of the tokens and the desired outcome. Tuning of velocity and time where needed in order to:
+     - Locate the robot in the center of the arena.
      - Avoid pushing the token to be grabbed.
      - Avoid colliding with the tokens near the goal point.
-     - Avoid skipping the identification of a near token. If the turn was too high, it was observed that the robot would skip the token almost in front of it.
-     - Coordinating rotation directions to not end in a loop of 'rotating right' - 'rotating left'
+     - Avoid skipping the identification of a near token. If the turn was too high, it was observed that the robot would skip the token almost in front of it from one loop tp the next one.
+     - Coordinating rotation directions to not end in a loop of 'rotating right' <-> 'rotating left'.
 
+* **Tuning motions**
+After certain tasks such as `R.grab` or `R.release`, some movements such as moving backwards or turning slightly where necessary to:
+    - Avoid colliding with placed tokens when rotating in the collecting zone.
+    - Placing the first token in teh desired position.
+      
 * **Tuning distance thresholds**
-This was needed in order to
+This was needed in order to:
     - Avoid colliding with nearby tokens at the collection zone.
-    - Place the tokens at a proper distance from the goal without pushing the goal token.
+    - Release the tokens at a proper distance from the goal without pushing the goal token (this happened if distance threshold for releasing the token was too small).
 
 * **Minimizing the number of functions to make main lighter**
 It was challenging to come up with a way that would compact the 3 Cases. At the end, the motion of all 3 Cases was possible by using if-else loops and variables to regonize the case.
+
+## Other tested solutions
+Before arriving to the solution presented in this work, these other two approaches were tried and tested:
+1. Collecting all tokens around the first detected token in its initial position.
+
+The problem encountered in this solution is that the tokens were collected near an edge of the arena, limiting the space where the other collected tokens could be placed. The first collected tokens were released in such a way that they created a "barrier" around the goal token, leaving a very narrow visual space for the robot to keep detecting the goal token. As a result, in some ocasions, when taking the last token to the GOAL the robot would miss the goal position and would continously turn while searching the goal. To solve this issue, a very small turn velocity was needed in order for the robot not to skip the detection of the goal from one loop to another. This made the collection a very slow process.
+
+2. Collecting the tokens from an initial position by moving towards the token and the moving back with a backtracing of motions.
+
+This approach was simple due to the fact that the algorithm just needed to record the motions performed from the goal position to the token and then perform those same motions in a negative speed to return to the goal position. The hard part of this solution was that a lot tuning was required in order to release the tokens in an ordered way without collisions and blockings.
 
 ## Possible improvements
 The solution developed runs around the following assumptions:
