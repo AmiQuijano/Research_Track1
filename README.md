@@ -103,15 +103,16 @@ The result of the developed script is the following :D
 ![Alt Text](images/img1.png)
 
 ## Code Description: Pseudocode
-The code in the file `assignmentRobot.py` contains the following functions and main explained with pseudocode as follows:
+The code in the file `assignmentRobot.py` contains the following functions and main explained as follows:
 
 ### drive(speed, seconds)
 This function makes the robot move in a straight line forward or backwards (depending on `speed` sign) for a certain time given a desired speed. 
 
 Arguments:
-* `speed`: The velocity of the motors in this case equal on both motors in order to move straight.
+* `speed`: The velocity of the motors, in this case equal on both motors in order to move straight.
 * `seconds`:Time interval during which the robot will move straight.
 
+Pseudocode:
 ```
 Function drive(speed, seconds):
     Set power of Robot.motor.right to speed
