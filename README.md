@@ -121,13 +121,15 @@ Function drive(speed, seconds):
     Set power of Robot.motor.right to 0
     Set power of Robot.motor.left to 0
 ```
+![Alt Text](images/vid1.mp4)
 ### turn(speed, seconds)
 This function makes the robot turn either right or left (depending on `speed` sign) a certain time given a desired speed. 
 
 Arguments:
-* `speed`: The velocity of the motors in this case equal in magnitude on both motors but opposite in sign in order to make a turn.
+* `speed`: The velocity of the motors, in this case equal in magnitude on both motors but opposite in sign in order to make a turn.
 * `seconds`:Time interval during which the robot will move straight.
-  
+
+Pseudocode:
 ```
 Function turn(speed, seconds):
     Set power of Robot.motor.right to speed
@@ -137,7 +139,7 @@ Function turn(speed, seconds):
     Set power of Robot.motor.left to 0
 ```
 ### find_token(found_tokens)
-This function finds the closest golden token identified by the robot with `R.see` within an initial maximum distance `dist` which have not yet been collected before. Keep in mind that `R.see` gives the distance `dist` and angle `rot_y` between the robot and the token seen. 
+This function finds the closest golden token identified by the robot with `R.see` within an initial maximum distance `dist = 100` which has not yet been collected before. Keep in mind that `R.see` gives the distance `dist` and angle `rot_y` between the robot and the token seen. 
 
 Arguments:
 * `found_tokens`: List of token codes which have been collected
@@ -147,7 +149,9 @@ Returns:
 * `rot_y`: angle between the robot and the token (-1 if no golden token is detected)
 * `num`: offset number or ID of the token (-1 if no golden token is detected)
 
-```   
+Pseudocode:
+```
+Function find_token(found_tokens):
     FOR each token in R.see:
         If (token.dist < dist) and (token.type is MARKER_TOKEN_GOLD) and (token.ID not in found_tokens):
             Set dist to token.dist
@@ -161,15 +165,16 @@ Returns:
         Return dist, rot_y, num
 ```
 ### find_goal(goal_code)
-This function finds the token assigned as the goal position (in this case, the center of the gray square in layout) identified by the robot with `R.see` within a maximum distance defined as `dist`. Keep in mind that `R.see` gives the distance `dist` and angle `rot_y` between the robot and the token seen. 
+This function finds the token assigned as the goal position (in this case, the center of the gray square in layout) identified by the robot with `R.see` within a maximum distance defined as `dist = 100`. Keep in mind that `R.see` gives the distance `dist` and angle `rot_y` between the robot and the token seen. 
 
 Arguments:
-* `goal_code`: offset number of the token referenced as the goal
+* `goal_code`: offset number or ID of the token referenced as the goal
 
 Returns:
 * `dist`: distance to the goal token (-1 if no golden token is detected)
 * `rot_y`: angle between the robot and the goal token (-1 if no golden token is detected)
 
+Pseudocode:
 ```
 Function find_goal(goal_code):
     FOR each goal in R.see:
@@ -202,8 +207,9 @@ Arguments:
 Returns:
 * `num`: The goal (for Case 1), the grabbed token (for Case 2) and the released token (for Case 3)
 
+Pseudocode:
 ```
-Function move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, grabbed_token):
+Function move_token(found_tokens, goal_code, case, angle_threshold, distance_threshold_for_approaching_token, distance_threshold_for_approaching_goal, grabbed_token):
 
     WHILE condition is True:
         IF Case 1 or Case 2:
@@ -278,6 +284,20 @@ Function move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal
 
 ```
 ### Main
+The main function consists on one while loop where the first action executed corresponds to Case 1. After Case 1 is executed, performance of Case 2 and Case 3 is alternating until all tokens have been collected.
+
+The initialized variables are:
+* `a_th = 2.0`: Threshold for the control of the orientation
+* `d_th_token = 0.4`: Threshold for the control of the linear distance when searching for a token
+*`d_th_goal = 0.7`: Threshold for the control of the linear distance when searching the GOAL
+* `found_tokens = []`: Empty list to be filled with the offset numbers of the found tokens
+* `list_actions = []`: Sequence of velocities and times, for both linear and rotationak motion, taken 
+by the robot to go from the collection area to the first token
+* `token_tot = 6`: Total number of tokens in arena
+* `goal_code = -1`: Offset ID of token, initialized in -1"""
+* `action = 1`: Case type, initialized in Case 1"""
+
+Pseudocode:
 ```
 Main function to move robot and tokens
 
@@ -294,19 +314,19 @@ WHILE True:
     print 'Collected tokens are found_tokens'
    
     IF Case 1:
-        num = call move_token
+        num = move_token_Case1
         add token_ID to found_tokens
         Case = Case 2
         goal_code = num
            
     ELIF Case 2:
-        num = call move_token
+        num = call move_token_Case2
         print 'Searching for new token to grab'
         Case = Case 3
         
     ELIF Case 3:
         print 'Moving to GOAL token'
-        num = call move_token
+        num = call move_token_Case3
         Case = Case 2
         add token_ID to found_tokens
     
