@@ -121,7 +121,7 @@ Function drive(speed, seconds):
     Set power of Robot.motor.right to 0
     Set power of Robot.motor.left to 0
 ```
-![Alt Text](images/vid1.mp4)
+
 ### turn(speed, seconds)
 This function makes the robot turn either right or left (depending on `speed` sign) a certain time given a desired speed. 
 
@@ -334,6 +334,32 @@ WHILE True:
         print 'All tokens have been collected! GREAT JOB :D'
         exit
 ```
+## Motion Demonstrations
+
+### Collection of first token
+This animation shows the last part of Case 1 execution
+* Case 1: Search for the first token, approach it, grab it, move it to center of arena and place it there. Make it the goal point for all future tokens found.
+![Alt Text](images/vid1.gif)
+
+### Collection of token different from goal token
+Here it can be observed that there is
+* Case 2: Search for a new token, approach it and grab it, only if it has not been already collected.
+* Case 3: Move the grabbed token to the goal point once the goal has been found and place it there.
+
+![Alt Text](images/vid2.gif)
+
+### 3
+![Alt Text](images/vid3.gif)
+
+### vid
+![Alt Text](images/vid.gif)
+
+### Collection of last token
+Here it can be observed that there is
+Case 2: Approaching and grabbing token different from goal token
+Case 3: Taking grabbed token towards goal token
+
+![Alt Text](images/vidt.gif)
 
 ## Main encountered difficulties
 The main challenges faced for complying the requirements where:
