@@ -336,26 +336,19 @@ WHILE True:
 ```
 ## Motion Demonstrations
 
-### Collection of first token
-This animation shows the last part of Case 1 execution
+### Collection of first token to the collection zone (center of gray square)
 * Case 1: Search for the first token, approach it, grab it, move it to center of arena and place it there. Make it the goal point for all future tokens found.
-![Alt Text](images/vid1.gif)
+![Alt Text](images/vid11.gif)
 
-### Collection of token different from goal token
-Here it can be observed that there is
+### Search and grab of token different from goal token
 * Case 2: Search for a new token, approach it and grab it, only if it has not been already collected.
+![Alt Text](images/vid22.gif)
+
+### Search of goal and release of token
 * Case 3: Move the grabbed token to the goal point once the goal has been found and place it there.
-
-![Alt Text](images/vid2.gif)
-
-### 3
-![Alt Text](images/vid3.gif)
-
-### vid
-![Alt Text](images/vid.gif)
+![Alt Text](images/vid33.gif)
 
 ### Collection of last token
-Here it can be observed that there is
 Case 2: Approaching and grabbing token different from goal token
 Case 3: Taking grabbed token towards goal token
 
