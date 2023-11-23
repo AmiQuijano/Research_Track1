@@ -315,8 +315,22 @@ WHILE True:
 ```
 
 ## Main encountered difficulties
+The main challenges faced for complying the requirements where:
+* **Tuning the motions, velocity and time**
+During the testing of the code, it was found that even small changes in either the velocity and time of the drive and turn functions could make a significant difference on the final position of the tokens. Additionally, after certain tasks such as `R.grab` or `R.release`, some movements where necessary for a smooth and efficient search and place of the tokens. Tuning of motion, velocity and time where needed in order to:
+     - Locate the robot in the center of the arena as desired as the collection zone.
+     - Avoid pushing the token to be grabbed.
+     - Avoid colliding with the tokens near the goal point.
+     - Avoid skipping the identification of a near token. If the turn was too high, it was observed that the robot would skip the token almost in front of it.
+     - Coordinating rotation directions to not end in a loop of 'rotating right' - 'rotating left'
 
+* **Tuning distance thresholds**
+This was needed in order to
+    - Avoid colliding with nearby tokens at the collection zone.
+    - Place the tokens at a proper distance from the goal without pushing the goal token.
 
+* **Minimizing the number of functions to make main lighter**
+It was challenging to come up with a way that would compact the 3 Cases. At the end, the motion of all 3 Cases was possible by using if-else loops and variables to regonize the case.
 
 ## Possible improvements
 The code works very smoothly in the current arena layout. Theredfore, it would be worthit to test the code in other arena layouts where the golden tokens are placed differently or where there are also other types of tokens such as silver ones.
