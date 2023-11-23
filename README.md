@@ -90,7 +90,7 @@ To download and run this simulator, install git and clone this repository.
 $ git clone https://github.com/AmiQuijano/Research_Track1.git
 ```
 
-Once all the dependencies are installed, simply run the following line to test the simulator.
+Once all the dependencies are installed, simply run the following line inside the directory of the repository to test the simulator.
 ```
 $ python3 run.py assignmentRobot.py
 ```
