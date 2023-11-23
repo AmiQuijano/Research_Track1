@@ -11,7 +11,7 @@ The arena was modified to suit the particular objective of this exercise.
 
 The simulator, in this particular project, provides one **Holonomic robot** and 6 equidistant **golden tokens** which are placed around a central gray square. The initial position and orientation of the robot as well as the arena layout can be observed in the image below.
 
-![Alt Text](images/img5.png)
+![Alt Text](images/image3.png)
 
 ## Simulator Documentation
 The API for controlling a simulated robot is designed to be as similar as possible to the [SR API][sr-api].
@@ -100,7 +100,7 @@ The project aims to make a holonomic robot move around the arena to find and gra
 
 The result of the developed script is the following :D
 
-![Alt Text](images/img1.png)
+![Alt Text](images/image2.png)
 
 ## Code Description: Pseudocode
 The code in the file `assignmentRobot.py` contains the following functions and main explained as follows:
