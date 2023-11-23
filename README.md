@@ -9,9 +9,9 @@ MSc Robotics Engineering at University of Genova
 This is a simple, portable simulator developed by [Student Robotics](https://studentrobotics.org/).
 The arena was modified to suit the particular objective of this exercise.
 
-The simulator, in this particular project, provides one **Holonomic robot** and 6 equidistant **golden tokens** which are placed around a central gray square, as it can be observed in the image below.
+The simulator, in this particular project, provides one **Holonomic robot** and 6 equidistant **golden tokens** which are placed around a central gray square. The initial position and orientation of the robot as well as the arena layout can be observed in the image below.
 
-![Alt Text](images/img2.png)
+![Alt Text](images/img5.png)
 
 ## Simulator Documentation
 The API for controlling a simulated robot is designed to be as similar as possible to the [SR API][sr-api].
