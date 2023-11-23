@@ -338,14 +338,17 @@ WHILE True:
 
 ### Collection of first token to the collection zone (center of gray square)
 * Case 1: Search for the first token, approach it, grab it, move it to center of arena and place it there. Make it the goal point for all future tokens found.
+
 ![Alt Text](images/vid11.gif)
 
 ### Search and grab of token different from goal token
 * Case 2: Search for a new token, approach it and grab it, only if it has not been already collected.
+
 ![Alt Text](images/vid22.gif)
 
 ### Search of goal and release of token
 * Case 3: Move the grabbed token to the goal point once the goal has been found and place it there.
+
 ![Alt Text](images/vid33.gif)
 
 ### Collection of last token
