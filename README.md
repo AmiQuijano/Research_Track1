@@ -121,6 +121,7 @@ Function drive(speed, seconds):
     Set power of Robot.motor.right to 0
     Set power of Robot.motor.left to 0
 ```
+![Alt Text](images/vid1.mp4)
 ### turn(speed, seconds)
 This function makes the robot turn either right or left (depending on `speed` sign) a certain time given a desired speed. 
 
