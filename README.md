@@ -333,4 +333,16 @@ This was needed in order to
 It was challenging to come up with a way that would compact the 3 Cases. At the end, the motion of all 3 Cases was possible by using if-else loops and variables to regonize the case.
 
 ## Possible improvements
-The code works very smoothly in the current arena layout. Theredfore, it would be worthit to test the code in other arena layouts where the golden tokens are placed differently or where there are also other types of tokens such as silver ones.
+The solution developed runs around the following assumptions:
+* Initial position and orientation of the robot is always the same one and it is the one given at
+the initialization of the program
+* The velocity and time needed for arriving to the central gray square, given the fixed initial 
+position and orientation, are known
+* It is known that there are 6 tokens in total
+* It is known that the tokens are placed around the central gray square
+
+The code works very smoothly in the current arena layout given these assumptions. Theredfore, it would be interesting to test the code and in other arena layouts where:
+    - Golden tokens are placed differently 
+    - Tere are also other types of tokens such as silver ones
+    
+    
