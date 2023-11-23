@@ -102,7 +102,7 @@ The result of the developed script is the following :D
 
 ![Alt Text](images/image2.png)
 
-## Code Description: Pseudocode
+## Code Description and Pseudocode
 The code in the file `assignmentRobot.py` contains the following functions and main explained as follows:
 
 ### drive(speed, seconds)
