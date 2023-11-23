@@ -390,13 +390,26 @@ It was challenging to come up with a way that would compact the 3 Cases. At the 
 
 ## Other tested solutions
 Before arriving to the solution presented in this work, these other two approaches were tried and tested:
-1. Collecting all tokens around the first detected token in its initial position.
+1. Collecting all tokens around the first detected token (around its initial position).
 
 The problem encountered in this solution is that the tokens were collected near an edge of the arena, limiting the space where the other collected tokens could be placed. The first collected tokens were released in such a way that they created a "barrier" around the goal token, leaving a very narrow visual space for the robot to keep detecting the goal token. As a result, in some ocasions, when taking the last token to the GOAL the robot would miss the goal position and would continously turn while searching the goal. To solve this issue, a very small turn velocity was needed in order for the robot not to skip the detection of the goal from one loop to another. This made the collection a very slow process.
 
-2. Collecting the tokens from an initial position by moving towards the token and the moving back with a backtracing of motions.
+2. Collecting the tokens from an initial position by moving towards each token and registering this trajectory and then moving back to the goal by backtracing the trajectory.
 
 This approach was simple due to the fact that the algorithm just needed to record the motions performed from the goal position to the token and then perform those same motions in a negative speed to return to the goal position. The hard part of this solution was that a lot tuning was required in order to release the tokens in an ordered way without collisions and blockings.
+
+Therefore, the solution presented in this work merged both approaches to have a better perfomance and more robustness.
+* **Using backtracking of motion to place the first token at the desired goal position**:
+
+This way, the code gained robustnesss in the sense that the first token could be any. Once in the robot is in the goal position, no matter which token the robot detects first, it will always approach and grab it and then take it back to the goal.
+
+* **Using the first token as a mark for locating the goal**:
+
+Since the `R.see` function only returns distance and angle with respect to a token, using one of them as reference eased the search and find process of the goal and little tuning was necessary to release the tokens in an ordered manner.
+
+* **Taking the center as the goal position**:
+
+Knowing beforehand that the tokens were placed around the center at equal distances, it was convenient to collect them in a clockwise or counter-clockwisse order and place them in the center. This way, there was always a free area for the robot to visualize and identify both the next token to grab and the goal token. In other words, there not blockages between the robot and the goal or other tokens to be grabbed and so, the goal and tokens were always detectable by the robot.
 
 ## Possible improvements
 The solution developed runs around the following assumptions:
@@ -408,16 +421,16 @@ position and orientation, are known
 * It is known that the tokens are placed around the central gray square
 This assumptions where taken into consideration given that the simulator has certain limitations (there is no global reference frame to refer to or only distances and angles between tokens can be obtained) that require a certain level of hardcoding
 
-The code works very smoothly in the current arena layout given these assumptions. Therefore, it would be interesting to test the code and in other arena layouts where:
+The code works very smoothly in the current arena layout given these assumptions. Therefore, it would be interesting to test and improve the code in order to work in different environments where:
 - Golden tokens are placed differently 
 - There are also other types of tokens such as silver ones
 - There are more than 6 tokens
-- Initial position of the robot is different
+- Initial position of the robot is different and/or unkown
   etc.
 
 Additionally, it was observed that without changing the code at all, with each run, the final position of the tokens would be slightly different from another test run. This could be attributed to small errorss in robot motion given the velocity and time as well as a small lag with respect to real time execution.
 
-Given these other situations it would worth it to see if an even more robust code can be written.
+Given these mentioned situations it would be worth it to see if an even more robust code can be written.
       
      
     
