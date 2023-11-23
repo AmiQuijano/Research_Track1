@@ -148,7 +148,9 @@ Returns:
 * `rot_y`: angle between the robot and the token (-1 if no golden token is detected)
 * `num`: offset number or ID of the token (-1 if no golden token is detected)
 
-```   
+Pseudocode:
+```
+Function find_token(found_tokens):
     FOR each token in R.see:
         If (token.dist < dist) and (token.type is MARKER_TOKEN_GOLD) and (token.ID not in found_tokens):
             Set dist to token.dist
@@ -206,7 +208,7 @@ Returns:
 
 Pseudocode:
 ```
-Function move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal, grabbed_token):
+Function move_token(found_tokens, goal_code, case, angle_threshold, distance_threshold_for_approaching_token, distance_threshold_for_approaching_goal, grabbed_token):
 
     WHILE condition is True:
         IF Case 1 or Case 2:
@@ -281,6 +283,20 @@ Function move_token(found_tokens, goal_code, action, a_th, d_th_token, d_th_goal
 
 ```
 ### Main
+The main function consists on one while loop where the first action executed corresponds to Case 1. After Case 1 is executed, performance of Case 2 and Case 3 is alternating until all tokens have been collected.
+
+The initialized variables are:
+* `a_th = 2.0`: Threshold for the control of the orientation
+* `d_th_token = 0.4`: Threshold for the control of the linear distance when searching for a token
+*`d_th_goal = 0.7`: Threshold for the control of the linear distance when searching the GOAL
+* `found_tokens = []`: Empty list to be filled with the offset numbers of the found tokens
+* `list_actions = []`: Sequence of velocities and times, for both linear and rotationak motion, taken 
+by the robot to go from the collection area to the first token
+* `token_tot = 6`: Total number of tokens in arena
+* `goal_code = -1`: Offset ID of token, initialized in -1"""
+* `action = 1`: Case type, initialized in Case 1"""
+
+Pseudocode:
 ```
 Main function to move robot and tokens
 
@@ -297,19 +313,19 @@ WHILE True:
     print 'Collected tokens are found_tokens'
    
     IF Case 1:
-        num = call move_token
+        num = move_token_Case1
         add token_ID to found_tokens
         Case = Case 2
         goal_code = num
            
     ELIF Case 2:
-        num = call move_token
+        num = call move_token_Case2
         print 'Searching for new token to grab'
         Case = Case 3
         
     ELIF Case 3:
         print 'Moving to GOAL token'
-        num = call move_token
+        num = call move_token_Case3
         Case = Case 2
         add token_ID to found_tokens
     
