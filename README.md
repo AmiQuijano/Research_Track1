@@ -1,11 +1,15 @@
 # Python Robot Simulator
-Assignment for Research Track 1 Course.
+
+Assignment 1 for Research Track 1 Course
+MSc Robotics Engineering at University of Genova
+
+-------------------
 
 ## Simulator description
 This is a simple, portable simulator developed by [Student Robotics](https://studentrobotics.org/).
 The arena was modified to suit the particular objective of this exercise.
 
-The simulator, in this particular arena, provides one **Holonomic robot** and 6 equidistant **golden tokens** which are placed around a central gray square, as it can be observed in the image below.
+The simulator, in this particular project, provides one **Holonomic robot** and 6 equidistant **golden tokens** which are placed around a central gray square, as it can be observed in the image below.
 
 ![Alt Text](images/img2.png)
 
@@ -99,15 +103,16 @@ The result of the developed script is the following :D
 ![Alt Text](images/img1.png)
 
 ## Code Description: Pseudocode
-The code in the file `assignmentRobot.py` contains the following functions and main explained with pseudocode as follows:
+The code in the file `assignmentRobot.py` contains the following functions and main explained as follows:
 
 ### drive(speed, seconds)
 This function makes the robot move in a straight line forward or backwards (depending on `speed` sign) for a certain time given a desired speed. 
 
 Arguments:
-* `speed`: The velocity of the motors in this case equal on both motors in order to move straight.
+* `speed`: The velocity of the motors, in this case equal on both motors in order to move straight.
 * `seconds`:Time interval during which the robot will move straight.
 
+Pseudocode:
 ```
 Function drive(speed, seconds):
     Set power of Robot.motor.right to speed
@@ -311,8 +316,42 @@ WHILE True:
 ```
 
 ## Main encountered difficulties
+The main challenges faced for complying the requirements where:
+* **Tuning the motions, velocity and time**
+During the testing of the code, it was found that even small changes in either the velocity and time of the drive and turn functions could make a significant difference on the final position of the tokens. Additionally, after certain tasks such as `R.grab` or `R.release`, some movements where necessary for a smooth and efficient search and place of the tokens. Tuning of motion, velocity and time where needed in order to:
+     - Locate the robot in the center of the arena as desired as the collection zone.
+     - Avoid pushing the token to be grabbed.
+     - Avoid colliding with the tokens near the goal point.
+     - Avoid skipping the identification of a near token. If the turn was too high, it was observed that the robot would skip the token almost in front of it.
+     - Coordinating rotation directions to not end in a loop of 'rotating right' - 'rotating left'
 
+* **Tuning distance thresholds**
+This was needed in order to
+    - Avoid colliding with nearby tokens at the collection zone.
+    - Place the tokens at a proper distance from the goal without pushing the goal token.
 
+* **Minimizing the number of functions to make main lighter**
+It was challenging to come up with a way that would compact the 3 Cases. At the end, the motion of all 3 Cases was possible by using if-else loops and variables to regonize the case.
 
 ## Possible improvements
-The code works very smoothly in the current arena layout. Theredfore, it would be worthit to test the code in other arena layouts where the golden tokens are placed differently or where there are also other types of tokens such as silver ones.
+The solution developed runs around the following assumptions:
+* Initial position and orientation of the robot is always the same one and it is the one given at
+the initialization of the program
+* The velocity and time needed for arriving to the central gray square, given the fixed initial 
+position and orientation, are known
+* It is known that there are 6 tokens in total
+* It is known that the tokens are placed around the central gray square
+This assumptions where taken into consideration given that the simulator has certain limitations (there is no global reference frame to refer to or only distances and angles between tokens can be obtained) that require a certain level of hardcoding
+
+The code works very smoothly in the current arena layout given these assumptions. Therefore, it would be interesting to test the code and in other arena layouts where:
+- Golden tokens are placed differently 
+- There are also other types of tokens such as silver ones
+- There are more than 6 tokens
+- Initial position of the robot is different
+  etc.
+
+Given these other situations it would worth it to see if an even more robust code can be written.
+      
+     
+    
+    
