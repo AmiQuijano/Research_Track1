@@ -392,6 +392,8 @@ The code works very smoothly in the current arena layout given these assumptions
 - Initial position of the robot is different
   etc.
 
+Additionally, it was observed that without changing the code at all, with each run, the final position of the tokens would be slightly different from another test run. This could be attributed to small errorss in robot motion given the velocity and time as well as a small lag with respect to real time execution.
+
 Given these other situations it would worth it to see if an even more robust code can be written.
       
      
