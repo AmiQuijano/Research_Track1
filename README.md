@@ -90,7 +90,7 @@ Once all the dependencies are installed, simply run the following line inside th
 $ python3 run.py assignmentRobot.py
 ```
 
-# Assignment
+# The Task
 The project aims to make a holonomic robot move around the arena to find and grab all the golden tokens and collect them in a desired zone. For this assignment, the chosen dropp off zone was the central gray square of the arena. 
 The solution developed runs around the following steps:
 1. Move the robot to the collection area (center of the gray aquare).
